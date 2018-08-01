@@ -7,35 +7,35 @@ const router = express.Router();
  * @param  {string} '/login' - path for registration
  * @param  {callback} controller.login - callback function from controller
  */
-router.get('/category', controller.getAll);
+router.get('/', controller.getAll);
 
 /**
  * router for registration http://localhost:5000/api/register
  * @param  {string} '/register' - path for registration
  * @param  {callback} controller.register - callback function from controller
  */
-router.get('/category:id', controller.getById);
+router.get('/:id', controller.getById);
 
 /**
  * router for registration http://localhost:5000/api/register
  * @param  {string} '/register' - path for registration
  * @param  {callback} controller.register - callback function from controller
  */
-router.delete('/category', controller.register);
+router.delete('/:id', controller.remove);
 
 /**
  * router for registration http://localhost:5000/api/register
  * @param  {string} '/register' - path for registration
  * @param  {callback} controller.register - callback function from controller
  */
-router.post('/category', controller.register);
+router.post('/', controller.create);
 
 /**
  * router for registration http://localhost:5000/api/register
  * @param  {string} '/register' - path for registration
  * @param  {callback} controller.register - callback function from controller
  */
-router.post('/category', controller.register);
+router.patch('/:id', controller.update);
 
 // Export router in app.js
 module.exports = router;
