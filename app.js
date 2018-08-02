@@ -16,9 +16,8 @@ mongoose.connect(keys.mongoURI)
     .catch(error => console.log(error));
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 app.use(cors());
 
