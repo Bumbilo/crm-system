@@ -1,3 +1,6 @@
+const Position = require('../models/Position');
+const error
+
 module.exports.getByCategoryId = (req, res) => {
 
 }
