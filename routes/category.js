@@ -1,5 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/category');
+const passport = require('passport');
 const router = express.Router();
 
 /**
@@ -7,7 +8,7 @@ const router = express.Router();
  * @param  {string} '/login' - path for registration
  * @param  {callback} controller.login - callback function from controller
  */
-router.get('/', controller.getAll);
+router.get('/', passport.authenticate('jwt', {session: false}), controller.getAll);
 
 /**
  * router for registration http://localhost:5000/api/register
