@@ -19,6 +19,7 @@ mongoose.connect(keys.mongoURI, {
     .catch(error => console.log('error', error));
 
 app.use(morgan('dev'));
+app.use('/uploads/', express.static('uploads'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
