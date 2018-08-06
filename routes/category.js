@@ -1,41 +1,25 @@
 const express = require('express');
 const controller = require('../controllers/category');
+const passport = require('passport');
 const router = express.Router();
+const upload = require('../middleware/upload');
 
-/**
- * router for login http://localhost:5000/api/login
- * @param  {string} '/login' - path for registration
- * @param  {callback} controller.login - callback function from controller
- */
-router.get('/', controller.getAll);
+router.get('/', passport.authenticate('jwt', {
+    session: false
+}), controller.getAll);
 
-/**
- * router for registration http://localhost:5000/api/register
- * @param  {string} '/register' - path for registration
- * @param  {callback} controller.register - callback function from controller
- */
-router.get('/:id', controller.getById);
-
-/**
- * router for registration http://localhost:5000/api/register
- * @param  {string} '/register' - path for registration
- * @param  {callback} controller.register - callback function from controller
- */
-router.delete('/:id', controller.remove);
-
-/**
- * router for registration http://localhost:5000/api/register
- * @param  {string} '/register' - path for registration
- * @param  {callback} controller.register - callback function from controller
- */
-router.post('/', controller.create);
-
-/**
- * router for registration http://localhost:5000/api/register
- * @param  {string} '/register' - path for registration
- * @param  {callback} controller.register - callback function from controller
- */
-router.patch('/:id', controller.update);
+router.get('/:id', passport.authenticate('jwt', {
+    session: false
+}), controller.getById);
+router.delete('/:id', passport.authenticate('jwt', {
+    session: false
+}), controller.remove);
+router.post('/', passport.authenticate('jwt', {
+    session: false
+}), upload.single('image'), controller.create);
+router.patch('/:id', passport.authenticate('jwt', {
+    session: false
+}), upload.single('image'), controller.update);
 
 // Export router in app.js
 module.exports = router;

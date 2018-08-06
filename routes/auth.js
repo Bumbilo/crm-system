@@ -1,6 +1,7 @@
 const express = require('express');
 const controller = require('../controllers/auth');
 const router = express.Router();
+const errorHandler = require('../utils/errorHandler');
 
 /**
  * router for login http://localhost:5000/api/login
