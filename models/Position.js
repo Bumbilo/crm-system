@@ -20,4 +20,4 @@ const positionSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('positions', categorySchema);
+module.exports = mongoose.model('positions', positionSchema);
