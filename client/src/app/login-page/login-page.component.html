@@ -35,7 +35,8 @@
       >
        <span *ngIf="form.get('password').errors['required']">Пароль не должен быть пустым</span>
 
-       <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
+       <span
+         *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
          Парль должен быть больше {{form.get('password').errors['minlength']['requiredLength'] }} символов
          Сейчас {{form.get('password').errors['minlength']['actualLength']}}
        </span>

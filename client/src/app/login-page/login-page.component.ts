@@ -10,8 +10,8 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
-  form: FormGroup;
-  aSub: Subscription;
+  public form: FormGroup;
+  public authSub: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -36,9 +36,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     })
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.form.disable();
-    this.aSub = this.auth.login(this.form.value).subscribe(
+    this.authSub = this.auth.login(this.form.value).subscribe(
       () => {
         this.router.navigate(['/overview']);
         console.log('login success')
@@ -51,8 +51,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.aSub) {
-      this.aSub.unsubscribe();
+    if (this.authSub) {
+      this.authSub.unsubscribe();
     }
   }
 }
