@@ -27,19 +27,16 @@ export class CategoriesFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({name: [null, [Validators.required]]});
 
-    // this.form.disable();
     this.route.params.pipe(
       filter((params: Params) => params['id'] !== undefined),
-      tap(() => this.form.disable()),
-      switchMap((param) => this.categoriesService.getCategoryById(param.id)),
       tap(() => {
+        this.form.disable();
         this.isNew = false;
-        this.form.enable();
       }),
+      switchMap((param) => this.categoriesService.getCategoryById(param.id)),
+      tap(() => this.form.enable()),
     ).subscribe(
-      (category: Category) => {
-        this.updateInput({name: category.name});
-      },
+      (category: Category) => this.updateInput({name: category.name}),
       ({error}) => MaterialService.toast(error.message)
     );
   }
