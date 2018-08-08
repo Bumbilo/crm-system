@@ -23,11 +23,17 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    /**
+     * Validation for form login (used form builder)
+     */
     this.form = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(6)]]
     });
 
+    /**
+     * Get params from route and send message with params message
+     */
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
         MaterialService.toast('Теперь вы можете зайти в систему используя свои данные');
@@ -39,20 +45,23 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * Send form of login and redirect on needed route or show error message
+   */
   onSubmit(): void {
     this.form.disable();
-    this.authSub = this.auth.login(this.form.value).subscribe(
-      () => {
-        this.router.navigate(['/overview']);
-        console.log('login success')
-      },
-      ({ error }) => {
-        MaterialService.toast(error.message);
-        this.form.enable();
-      }
-    )
+    this.authSub = this.auth.login(this.form.value)
+      .subscribe(
+        () => this.router.navigate(['/overview']),
+        ({error}) => {
+          MaterialService.toast(error.message);
+          this.form.enable();
+        })
   }
 
+  /**
+   * Unsubscribe from all subscribers
+   */
   ngOnDestroy() {
     if (this.authSub) {
       this.authSub.unsubscribe();

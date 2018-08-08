@@ -1,3 +1,5 @@
+import { ElementRef } from "@angular/core";
+
 declare var M;
 
 export class MaterialService {
@@ -5,5 +7,14 @@ export class MaterialService {
     M.toast({html: message});
   }
 
-  constructor() { }
+  static initializeFloatingButton(ref: ElementRef) {
+    M.FloatingActionButton.init(ref.nativeElement);
+  }
+
+  static updateTextInputs() {
+    M.updateTextFields();
+  }
+
+  constructor() {
+  }
 }
